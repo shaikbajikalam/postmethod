@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+	<style type="text/css">
+		body{
+			background-image: url(https://img.freepik.com/free-photo/grunge-paint-background_1409-1337.jpg?w=2000);
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+		.vibe{
+			text-align: center;
+			margin-top: 6%;
+			margin-right: 5%;
+		}
+		.page{
+			font-family: 'Lobster', cursive;
+		}
+		#username{
+			font-size: 22px;
+			text-align: center;
+			border: 2px solid white;
+			border-radius: 25px;
+		}
+		#password{
+			font-size: 22px;
+			text-align: center;
+			border-radius: 2px solid white;
+			border-radius: 25px;
+		}
+		#sub{
+			font-size: ;
+		}
+		#car{
+			font-size: 18px;
+		}
+		#sub{
+			font-size: 25px;
+		}
+		#sub:hover{
+			background-color: black;
+			color: white;
+		}
+		.gender{
+			font-size: 23px;
+		}
+	</style>
+</head>
+<body> 
+	<script type="text/javascript">
+		function submit(){
+			var username=document.getElementById("username").value
+			console.log(username)
+			var password=document.getElementById("password").value
+			console.log(password)
+			var car=document.getElementById("car").value
+			console.log(car)
+			var gmale=document.getElementById("male").checked
+			var gfemale=document.getElementById("female").checked
+			if(gmale==true)
+				var gender=("Male")
+			else
+				var gender=("Female")
+			console.log(gender)
+			fetch("http://localhost:2700/newData",{
+				method:"POST",
+				headers:{
+					"content-Type":"application/json"
+				},
+				body:JSON.stringify({name:username,password:password,vehicle:car,gender:gender})
+			})
+			.then((res)=>{
+				console.log(res)
+				if(res.status===200)
+					alert("registration page")
+			})
+			.catch((err)=>{
+				alert(err)
+			})
+		}
+	</script>
+	<div class="vibe">
+		<h1 class="page">Registration Page</h1>
+			<p><input id="username" placeholder="enter your name"/></p>
+			<p><input id="password" placeholder="enter password"></p>
+			<select id="car">
+					<option value="select a car">Select a Car</option>
+					<option value="Audi">Audi</option>
+					<option value="BMW">BMW</option>
+					<option value="Benz">Benz</option>
+					<option value="KIA">KIA</option>
+				</p>
+			</select>
+			<p class="gender">
+			   <input type="radio" name="gender" id="male">Male
+			   <input type="radio" name="gender" id="female">Female
+			</p>
+			<p><button onclick="submit()" id="sub">submit</button></p>
+	    </div>
+</body>
+</html>
